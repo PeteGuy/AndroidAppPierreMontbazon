@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity  android:name="DealList"  />
+        <activity  android:name=".DealListActivity"  />
+        <activity android:name=".ShowDealActivity"/>
 
     </application>
 

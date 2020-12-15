@@ -9,10 +9,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="60dp"
+            android:layout_height="69dp"
+            android:layout_gravity="right"
+            app:srcCompat="@drawable/gear_icon"
+            android:onClick="goToPreferences"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-37dp">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/profil"
@@ -23,6 +38,7 @@
 
         <ImageView
             android:id="@+id/imageView"
+
             android:layout_width="232dp"
             android:layout_height="315dp"
             app:srcCompat="@drawable/profile_icon" />
@@ -40,12 +56,6 @@
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:text="Lancer recherche" />
-
-        <Button
-            android:id="@+id/btest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
 
     </LinearLayout>
 

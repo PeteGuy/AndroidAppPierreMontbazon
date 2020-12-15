@@ -4,15 +4,10 @@ package com.montbazon.gg_shark;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
-
-import org.json.JSONObject;
 
 
 import java.io.BufferedInputStream;
@@ -22,12 +17,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 //import org.json.simple.parser.JSONParser;
 
@@ -114,7 +103,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer,JSONArray>
     @Override
     protected void onPostExecute(JSONArray ja)
     {
-        Intent deal = new Intent( ctx,DealList.class);
+        Intent deal = new Intent( ctx, DealListActivity.class);
         deal.putExtra("jsonarray",ja.toString());
         deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(deal);

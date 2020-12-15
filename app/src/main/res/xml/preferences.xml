@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditTextPreference
+        android:defaultValue="Default value"
+        android:key="edit_text_preference_1"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Edit text preference" />
+
+
+    android:entryValues="@android:array/postalAddressTypes"
+        android:key="multi_select_list_preference_1"
+        android:title="Multi select list preference" />
+</PreferenceScreen>
