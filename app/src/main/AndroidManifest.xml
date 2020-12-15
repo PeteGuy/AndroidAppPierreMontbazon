@@ -22,6 +22,7 @@
 
         <activity  android:name=".DealListActivity"  />
         <activity android:name=".ShowDealActivity"/>
+        <activity android:name=".PreferencesActivity"/>
 
     </application>
 

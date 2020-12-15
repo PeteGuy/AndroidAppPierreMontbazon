@@ -3,14 +3,31 @@
 
 
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
+
+        android:defaultValue="nom"
+        android:key="nom"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Edit text preference" />
+        android:textAlignment="center"
+        android:title="Entrez votre nom" />
+    <EditTextPreference
+        android:defaultValue="50"
+        android:key="prixmax"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Prix maximum" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="SteamSwitch"
+        android:title="Steam" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="GOGSwitch"
+        android:title="GOG" />
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="EpicGamesSwitch"
+        android:title="Epic Games" />
 
 
-    android:entryValues="@android:array/postalAddressTypes"
-        android:key="multi_select_list_preference_1"
-        android:title="Multi select list preference" />
 </PreferenceScreen>

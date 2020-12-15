@@ -4,6 +4,7 @@ package com.montbazon.gg_shark;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 
 
 import org.json.JSONArray;
@@ -37,7 +38,10 @@ public class AsyncRecherche extends AsyncTask<String,Integer,JSONArray>
     {
 
         String title = params[0];
+        Log.i("WOU",params[1]+"euuuh");
         //Log.i("JFL","https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60");
+
+
 
         URL url =null;
         try{
