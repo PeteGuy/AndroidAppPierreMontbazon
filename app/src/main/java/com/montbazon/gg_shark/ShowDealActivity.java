@@ -47,14 +47,16 @@ public class ShowDealActivity extends AppCompatActivity
 
         TextView titre = findViewById(R.id.titre);
         TextView prix = findViewById(R.id.prix);
+        TextView prixOri = findViewById(R.id.prix2);
         TextView note = findViewById(R.id.note);
 
 
 
 
-        titre.setText(extras.getString("name"));
-        prix.setText(extras.getString("prix"));
-        note.setText(extras.getString("note"));
+        titre.setText("Titre : "+extras.getString("name"));
+        prix.setText("Prix du deal : "+extras.getString("prix") + "$");
+        prixOri.setText("Prix original : "+extras.getString("prixOri") + "$");
+        note.setText("Note : "+extras.getString("note")+"/10");
 
 
     }

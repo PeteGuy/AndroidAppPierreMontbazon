@@ -61,8 +61,8 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
                 imageStore.setImageResource(R.drawable.whiteicon);
         }
 
-        imageStore.getLayoutParams().height = 100;
-        imageStore.getLayoutParams().width = 100;
+        imageStore.getLayoutParams().height = 75;
+        imageStore.getLayoutParams().width = 75;
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +74,7 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
                 goDeal.putExtra("storeID",deal.storeid);
                 goDeal.putExtra("thumb",deal.imageURL);
                 goDeal.putExtra("prix",deal.price);
+                goDeal.putExtra("prixOri",deal.priceOri);
 
                 getContext().startActivity(goDeal);
             }

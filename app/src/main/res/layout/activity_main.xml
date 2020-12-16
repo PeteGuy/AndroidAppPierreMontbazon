@@ -12,13 +12,6 @@
         android:orientation="horizontal"
         android:gravity="right">
 
-        <Button
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Button" />
-
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="60dp"
@@ -38,10 +31,12 @@
 
         <TextView
             android:id="@+id/profil"
-            android:layout_width="226dp"
-            android:layout_height="35dp"
+            android:layout_width="341dp"
+            android:layout_height="79dp"
             android:gravity="center"
-            android:text="Profil 1" />
+            android:text="Profil 1"
+            android:textColor="@color/black"
+            android:textSize="50dp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -60,10 +55,11 @@
 
         <Button
             android:id="@+id/bchercher"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="101dp"
             android:layout_gravity="center"
-            android:text="Chercher" />
+            android:text="Chercher"
+            android:textSize="30dp"/>
 
     </LinearLayout>
 

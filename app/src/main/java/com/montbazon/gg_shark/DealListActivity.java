@@ -62,7 +62,10 @@ public class DealListActivity extends AppCompatActivity
                 for (int i=0; i<j.length(); i++) {
                     if(((String) j.getJSONObject(i).get("isOnSale")).equals("1"))
                     {
-                        adapter.add(new Deal((String) j.getJSONObject(i).get("title"),(String) j.getJSONObject(i).get("salePrice"),(String)j.getJSONObject(i).get("thumb"),(String)j.getJSONObject(i).get("storeID"),(String)j.getJSONObject(i).get("dealRating")));
+                        adapter.add(new Deal((String) j.getJSONObject(i).get("title"),
+                                (String) j.getJSONObject(i).get("salePrice"),(String)j.getJSONObject(i).get("thumb"),
+                                (String)j.getJSONObject(i).get("storeID"),(String)j.getJSONObject(i).get("dealRating"),
+                                (String) j.getJSONObject(i).get("normalPrice")));
                     }
 
 

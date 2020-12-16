@@ -26,20 +26,35 @@
             android:layout_height="103dp"
             android:gravity="center"
             android:text="Titre"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/prix2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:text="Prix :"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/prix"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="70dp"
+            android:gravity="center"
             android:text="Prix :"
-            android:gravity="center"/>
+            android:textSize="30dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Note du deal"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/black"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
