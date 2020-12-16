@@ -39,17 +39,12 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     protected String[] doInBackground(String... params)
     {
 
-        //ArrayList<JSONArray> jarray = new ArrayList();
+
 
         String[] resultat = new String[3];
 
-        //Log.i("JFL","https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60");
-
         URL urls[] = new URL[3];
 
-        URL url =null;
-        URL url2=null;
-        URL url3=null;
 
         String storeid;
         try{
@@ -58,7 +53,8 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
             {
                 if(params[i] == "true")
                 {
-                    switch (i) {
+                    switch (i)
+                    {
                         case 1:
                             storeid = "&storeID=1";
                             break;
@@ -74,7 +70,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 
                     }
 
-                    Log.i("Pierre","https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=300"+storeid+params[4]);
+                    //Création de l'url en fonction des préférences
                     urls[i-1] = new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=300"+storeid+params[4]);
 
                 }
@@ -125,6 +121,8 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     @Override
     protected void onPostExecute(String[] resultat)
     {
+
+        //On passe directement à la list view des deals
         Intent deal = new Intent( ctx, DealListActivity.class);
 
 
@@ -139,10 +137,8 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
                 deal.putExtra(Integer.toString(i),"");
             }
 
-            //Log.i("Resultat",resultat[i]);
+
         }
-
-
 
         deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(deal);
@@ -151,6 +147,8 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 
     }
 
+
+    //Méthode de lecture de stream
     private String readStream(InputStream is)
     {
 

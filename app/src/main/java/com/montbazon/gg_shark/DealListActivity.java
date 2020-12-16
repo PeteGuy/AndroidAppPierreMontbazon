@@ -27,7 +27,7 @@ public class DealListActivity extends AppCompatActivity
         setContentView(R.layout.list);
         Bundle extras = getIntent().getExtras();
 
-
+        //On crée liste des éléments récupérés
         jlist = new ArrayList<JSONArray>();
 
         for (int i = 0;i<3;i++)
@@ -47,16 +47,15 @@ public class DealListActivity extends AppCompatActivity
 
         JSONArray deaList;
         try {
-            //deaList = new JSONArray(s);
+
             ArrayList<Deal>  theDeals = new ArrayList<Deal>();
 
             DealAdapter adapter = new DealAdapter(this,theDeals);
 
             ListView list = (ListView)findViewById(R.id.maliste);
-           /* ArrayAdapter<String> tableau = new ArrayAdapter<String>(
-                    list.getContext(), R.layout.montexte,R.id.montexte);*/
 
 
+            //On parcourt les différents items de chaque élément de la liste
             for(JSONArray j : jlist )
             {
                 for (int i=0; i<j.length(); i++) {
@@ -73,20 +72,7 @@ public class DealListActivity extends AppCompatActivity
             }
 
             list.setAdapter(adapter);
-            /*list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
 
-                    int pos = (Integer)view.getTag();
-
-
-                    Intent n = new Intent(getApplicationContext(), ShowDealActivity.class);
-                    //n.putExtra("name",g;
-                    //n.putExtra("position", position);
-                    startActivity(n);
-                }
-            });*/
 
         } catch (JSONException e) {
             e.printStackTrace();

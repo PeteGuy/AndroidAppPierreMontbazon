@@ -15,10 +15,7 @@ public class ShowDealActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dealview);
 
-        /*goDeal.putExtra("name",deal.name);
-        goDeal.putExtra("note",deal.note);
-        goDeal.putExtra("storeID",deal.storeid);
-        goDeal.putExtra("rating",deal.note);*/
+
 
         Bundle extras = getIntent().getExtras();
 
@@ -26,6 +23,8 @@ public class ShowDealActivity extends AppCompatActivity
 
         String store = extras.getString("storeID");
 
+
+        //Changement de l'image en fonction du site concerné
         switch(store)
         {
             case "1":

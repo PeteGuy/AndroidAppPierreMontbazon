@@ -34,11 +34,15 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
             convertView = LayoutInflater.from(getContext())
                     .inflate(R.layout.mondeal,parent,false);
         }
+
+
         TextView name = (TextView) convertView.findViewById(R.id.name);
         TextView price = (TextView) convertView.findViewById(R.id.price);
         ImageView imageStore = (ImageView) convertView.findViewById(R.id.imageStore);
         Button button = (Button) convertView.findViewById(R.id.button);
 
+
+        //On applique les données récupérées aux éléments de la view
         name.setText(deal.name);
         price.setText(deal.price);
 
@@ -68,6 +72,9 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                //On lance la ShowDealActivity avec les paramètres
                 Intent goDeal = new Intent(getContext(),ShowDealActivity.class);
                 goDeal.putExtra("name",deal.name);
                 goDeal.putExtra("note",deal.note);
@@ -79,7 +86,7 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
                 getContext().startActivity(goDeal);
             }
         });
-        //Log.i("storeid",deal.storeid);
+
         return convertView;
 
     }
