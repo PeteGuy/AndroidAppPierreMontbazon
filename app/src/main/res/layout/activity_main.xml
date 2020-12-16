@@ -62,7 +62,8 @@
             android:id="@+id/bchercher"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
-            android:text="Lancer recherche" />
+            android:layout_gravity="center"
+            android:text="Chercher" />
 
     </LinearLayout>
 

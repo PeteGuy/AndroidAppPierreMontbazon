@@ -18,14 +18,16 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 //import org.json.simple.parser.JSONParser;
 
 
-public class AsyncRecherche extends AsyncTask<String,Integer,JSONArray>
+public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 {
 
     Context ctx;
+
 
     public AsyncRecherche(Context ctx)
     {
@@ -34,28 +36,61 @@ public class AsyncRecherche extends AsyncTask<String,Integer,JSONArray>
     }
 
     @Override
-    protected JSONArray doInBackground(String... params)
+    protected String[] doInBackground(String... params)
     {
 
-        String title = params[0];
-        Log.i("WOU",params[1]+"euuuh");
+        //ArrayList<JSONArray> jarray = new ArrayList();
+
+        String[] resultat = new String[3];
+
         //Log.i("JFL","https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60");
 
 
 
         URL url =null;
+        URL url2=null;
+        URL url3=null;
         try{
-            url =new URL("https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60");
+            url =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=1");
+            url2 =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=7");
+            url3 =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=25");
+            //Log.i("Pierre","https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID="+params[1]);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection urlConnection2 = (HttpURLConnection) url2.openConnection();
+            HttpURLConnection urlConnection3 = (HttpURLConnection) url3.openConnection();
+
             try
             {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                final String s = readStream(in);
-                JSONArray ja = new JSONArray(s);
-                //Log.i("JFL", (String) ja.getJSONObject(1).get("gameID"));
-                return ja;
+                InputStream in2 = new BufferedInputStream(urlConnection2.getInputStream());
+                InputStream in3 = new BufferedInputStream(urlConnection3.getInputStream());
 
-            } catch (JSONException e) {
+
+                 resultat[0]= readStream(in);
+                 resultat [1]= readStream(in2);
+                resultat[2] = readStream(in3);
+
+
+
+
+                Log.i("Pierre",resultat[0]+"ibib");
+                Log.i("Pierre",resultat[1]+"ubo");
+                Log.i("Pierre","oih"+resultat[2]);
+
+                /*JSONArray ja = new JSONArray(s);
+                JSONArray ja2 = new JSONArray(s2);
+                JSONArray ja3 = new JSONArray(s3);*/
+
+
+                /*jarray.add(ja);
+                jarray.add(ja2);
+                jarray.add(ja3);
+                //Log.i("JFL", jarray.toString());
+                //return ja;*/
+
+                return resultat;
+
+            } catch (Exception e) {
                 e.printStackTrace();
             } finally{urlConnection.disconnect();
             }}
@@ -64,51 +99,20 @@ public class AsyncRecherche extends AsyncTask<String,Integer,JSONArray>
         catch(IOException e) {e.printStackTrace();
         }
 
-        /*
-        OkHttpClient okHttpClient = new OkHttpClient();
+
+        return resultat;
 
 
-        Request myGetRequest = new Request.Builder()
-                .url("https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60")
-                .build();
-
-        okHttpClient.newCall(myGetRequest).enqueue(new Callback()
-        {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String text = response.body().string();
-                final int statusCode = response.code();
-                Log.i("JFL",text);
-
-                try {
-                    JSONArray jArray = new JSONArray(text);
-                    Log.i("OUMF", jArray.get(0).toString());
-                    return jArray;
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-
-
-    });*/
-
-
-        return null;
     }
 
     @Override
-    protected void onPostExecute(JSONArray ja)
+    protected void onPostExecute(String[] resultat)
     {
         Intent deal = new Intent( ctx, DealListActivity.class);
-        deal.putExtra("jsonarray",ja.toString());
+        deal.putExtra("r1",resultat[0]);
+        deal.putExtra("r2",resultat[1]);
+        deal.putExtra("r3",resultat[2]);
+
         deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(deal);
 
