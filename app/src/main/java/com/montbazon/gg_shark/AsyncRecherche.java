@@ -45,58 +45,75 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 
         //Log.i("JFL","https://www.cheapshark.com/api/1.0/games?title="+title+"&limit=60");
 
-
+        URL urls[] = new URL[3];
 
         URL url =null;
         URL url2=null;
         URL url3=null;
+
+        String storeid;
         try{
-            url =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=1");
-            url2 =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=7");
-            url3 =new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID=25");
-            //Log.i("Pierre","https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=60&storeID="+params[1]);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            HttpURLConnection urlConnection2 = (HttpURLConnection) url2.openConnection();
-            HttpURLConnection urlConnection3 = (HttpURLConnection) url3.openConnection();
 
-            try
+            for(int i = 1; i<4;i++)
             {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                InputStream in2 = new BufferedInputStream(urlConnection2.getInputStream());
-                InputStream in3 = new BufferedInputStream(urlConnection3.getInputStream());
+                if(params[i] == "true")
+                {
+                    switch (i) {
+                        case 1:
+                            storeid = "&storeID=1";
+                            break;
+                        case 2:
+                            storeid = "&storeID=7";
+                            break;
+                        case 3:
+                            storeid = "&storeID=25";
+                            break;
+                        default:
+                            Log.i("Pierre", "this failed");
+                            storeid = "";
+
+                    }
+
+                    Log.i("Pierre","https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=300"+storeid+params[4]);
+                    urls[i-1] = new URL("https://www.cheapshark.com/api/1.0/deals?title="+params[0]+"&limit=300"+storeid+params[4]);
+
+                }
+
+            }
+
+            for(int i =0;i<3;i++)
+            {
+                if(urls[i] != null)
+                {
+                    HttpURLConnection urlConnection = (HttpURLConnection) urls[i].openConnection();
+
+                    try
+                    {
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                        resultat[i] = readStream(in);
+
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    } finally{urlConnection.disconnect();
+                    }
+                }
+                else
+                {
+                    resultat[i] = "";
+                }
 
 
-                 resultat[0]= readStream(in);
-                 resultat [1]= readStream(in2);
-                resultat[2] = readStream(in3);
+            }
 
 
 
 
-                Log.i("Pierre",resultat[0]+"ibib");
-                Log.i("Pierre",resultat[1]+"ubo");
-                Log.i("Pierre","oih"+resultat[2]);
 
-                /*JSONArray ja = new JSONArray(s);
-                JSONArray ja2 = new JSONArray(s2);
-                JSONArray ja3 = new JSONArray(s3);*/
-
-
-                /*jarray.add(ja);
-                jarray.add(ja2);
-                jarray.add(ja3);
-                //Log.i("JFL", jarray.toString());
-                //return ja;*/
-
-                return resultat;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally{urlConnection.disconnect();
-            }}
-        catch(MalformedURLException e) {e.printStackTrace();
-        }
-        catch(IOException e) {e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -109,9 +126,23 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     protected void onPostExecute(String[] resultat)
     {
         Intent deal = new Intent( ctx, DealListActivity.class);
-        deal.putExtra("r1",resultat[0]);
-        deal.putExtra("r2",resultat[1]);
-        deal.putExtra("r3",resultat[2]);
+
+
+        for(int i = 0;i<3;i++)
+        {
+            if (resultat[i]!="")
+            {
+                deal.putExtra(Integer.toString(i),resultat[i]);
+            }
+            else
+            {
+                deal.putExtra(Integer.toString(i),"");
+            }
+
+            //Log.i("Resultat",resultat[i]);
+        }
+
+
 
         deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(deal);

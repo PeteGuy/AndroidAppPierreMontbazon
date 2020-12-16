@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity
     String prixmax;
 
 
+    Boolean[] stores = new Boolean[3];
+
     TextView profil;
     Button brequete;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Log.i("JFL", inputTitre.getText().toString()+prefUrl);
                 AsyncRecherche requete = new AsyncRecherche(getApplicationContext());
-                requete.execute(inputTitre.getText().toString(),"1");
+                requete.execute(inputTitre.getText().toString(),stores[0].toString(),stores[1].toString(),stores[2].toString(),prixmax);
 
 
 
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     {
         //Log.i("TENTEY", "therewasanattempt");
         Intent preferences = new Intent(getApplicationContext(),PreferencesActivity.class);
+
         startActivity(preferences);
     }
 
@@ -97,38 +100,21 @@ public class MainActivity extends AppCompatActivity
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        //prefUrl = "";
 
-
-        /*storesid = "(";
 
 
 
         //Ajout des magasins selon les préférences
-        if(prefs.getBoolean("SteamSwitch",false))
-        {
-            if (storesid.substring(0, 1) != "(")
-                storesid += ",";
-            storesid += "1";
-        }
-        if(prefs.getBoolean("GOGSwitch",false))
-        {
-            if(storesid.substring(0,1) != "(")
-                storesid+=",";
-            storesid+="7";
-        }
-        if(prefs.getBoolean("EpicGamesSwitch",false))
-        {
-            if (storesid.substring(0, 1) != "(")
-                storesid += ",";
-            storesid += "25";
+        stores[0]=(prefs.getBoolean("SteamSwitch",false));
 
-        }
-        storesid+=")";
+        stores[1]=(prefs.getBoolean("GOGSwitch",false));
 
-        prefUrl= "&storeID="+storesid;
-        //Log.i("TENTEY", storesid);
-        */
+        stores[2] = prefs.getBoolean("EpicGamesSwitch",false);
+
+
+
+
+
 
 
         //Ajout du prix max si on a une préférence
@@ -136,8 +122,9 @@ public class MainActivity extends AppCompatActivity
         if(prix != null)
         {
             if (android.text.TextUtils.isDigitsOnly(prix)) {
-                prixmax = "&upperPrice";
+                prixmax = "&upperPrice="+prix;
             }
+
         }
 
 
