@@ -4,7 +4,9 @@ package com.montbazon.gg_shark;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -28,16 +30,21 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 
     Context ctx;
 
+    Boolean resultatExist = false;
+
 
     public AsyncRecherche(Context ctx)
     {
         super();
         this.ctx = ctx;
+
     }
 
     @Override
     protected String[] doInBackground(String... params)
     {
+
+
 
 
 
@@ -86,6 +93,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
                     try
                     {
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        resultatExist= true;
 
                         resultat[i] = readStream(in);
 
@@ -121,27 +129,31 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     @Override
     protected void onPostExecute(String[] resultat)
     {
-
-        //On passe directement à la list view des deals
-        Intent deal = new Intent( ctx, DealListActivity.class);
-
-
-        for(int i = 0;i<3;i++)
+        if(resultatExist)
         {
-            if (resultat[i]!="")
-            {
-                deal.putExtra(Integer.toString(i),resultat[i]);
-            }
-            else
-            {
-                deal.putExtra(Integer.toString(i),"");
-            }
+            //On passe directement à la list view des deals
+            Intent deal = new Intent( ctx, DealListActivity.class);
 
 
+            for(int i = 0;i<3;i++)
+            {
+                if (resultat[i]!="")
+                {
+                    deal.putExtra(Integer.toString(i),resultat[i]);
+                }
+                else
+                {
+                    deal.putExtra(Integer.toString(i),"");
+                }
+
+
+            }
+
+            deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            ctx.startActivity(deal);
         }
 
-        deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        ctx.startActivity(deal);
+
 
 
 

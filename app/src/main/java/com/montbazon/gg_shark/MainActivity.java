@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
 
         reloadPreferences();
-        //Toast.makeText(getApplicationContext(),prefs.getString("nom",""),Toast.LENGTH_SHORT).show();
+
 
 
         brequete.setOnClickListener(new View.OnClickListener()
@@ -62,8 +62,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Log.i("JFL", inputTitre.getText().toString()+prefUrl);
+                Toast toast = Toast.makeText(getApplicationContext(), "Recherche de deals", Toast.LENGTH_SHORT);
+                toast.show();
                 AsyncRecherche requete = new AsyncRecherche(getApplicationContext());
                 requete.execute(inputTitre.getText().toString(),stores[0].toString(),stores[1].toString(),stores[2].toString(),prixmax);
+
 
 
 
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     public void goToPreferences(View v)
     {
-        //Log.i("TENTEY", "therewasanattempt");
+
         Intent preferences = new Intent(getApplicationContext(),PreferencesActivity.class);
 
         startActivity(preferences);
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity
     public void reloadPreferences()
     {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
+        //Toast.makeText(getApplicationContext(),"Chargement des préférences",Toast.LENGTH_SHORT).show();
 
 
 
