@@ -62,8 +62,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Log.i("JFL", inputTitre.getText().toString()+prefUrl);
+
                 Toast toast = Toast.makeText(getApplicationContext(), "Recherche de deals", Toast.LENGTH_SHORT);
                 toast.show();
+
                 AsyncRecherche requete = new AsyncRecherche(getApplicationContext());
                 requete.execute(inputTitre.getText().toString(),stores[0].toString(),stores[1].toString(),stores[2].toString(),prixmax);
 
@@ -72,10 +74,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
-
-
-
 
 
     }
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onPostResume() {
         super.onPostResume();
-
 
         reloadPreferences();
 

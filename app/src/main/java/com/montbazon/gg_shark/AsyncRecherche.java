@@ -44,10 +44,6 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     protected String[] doInBackground(String... params)
     {
 
-
-
-
-
         String[] resultat = new String[3];
 
         URL urls[] = new URL[3];
@@ -93,7 +89,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
                     try
                     {
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                        resultatExist= true;
+
 
                         resultat[i] = readStream(in);
 
@@ -129,8 +125,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
     @Override
     protected void onPostExecute(String[] resultat)
     {
-        if(resultatExist)
-        {
+
             //On passe directement à la list view des deals
             Intent deal = new Intent( ctx, DealListActivity.class);
 
@@ -151,7 +146,7 @@ public class AsyncRecherche extends AsyncTask<String,Integer, String[]>
 
             deal.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             ctx.startActivity(deal);
-        }
+
 
 
 

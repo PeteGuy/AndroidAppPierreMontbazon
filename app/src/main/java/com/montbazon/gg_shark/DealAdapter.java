@@ -44,7 +44,7 @@ public class DealAdapter  extends ArrayAdapter<Deal> {
 
         //On applique les données récupérées aux éléments de la view
         name.setText(deal.name);
-        price.setText(deal.price);
+        price.setText(deal.price + " $");
 
         switch(deal.storeid)
         {
